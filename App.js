@@ -9,6 +9,9 @@ export default function App() {
   const [matriz, setMatriz] = useState([['', '', ''], ['', '', ''], ['', '', '']]);
   const [vezJogador, setVezJogador] = useState(primeiroJogador);
   const [qtdJogadas, setQtdJogadas] = useState(9);
+  const [qtdVencedorX, setQtdVencedorX] = useState(0);
+  const [qtdVencedorO, setQtdVencedorO] = useState(0);
+  const [qtdVelhas, setQtdVelhas] = useState(0);
 
   function jogada(rowIndex, colIndex) {
     if (matriz[rowIndex][colIndex] !== '' || qtdJogadas === 0) {
@@ -57,7 +60,11 @@ export default function App() {
         'Vencedor!',
         `O jogador ${vezJogador} ganhou!`,
         [{ text: 'OK', onPress: () => {
-   
+          if (vezJogador === "X") {
+            setQtdVencedorX(qtdVencedorX + 1);
+          } else {
+            setQtdVencedorO(qtdVencedorO + 1);
+          }
           setMatriz([['', '', ''], ['', '', ''], ['', '', '']]);
           setQtdJogadas(9);
           setVezJogador(primeiroJogador === "X" ? "O" : "X");
@@ -69,10 +76,10 @@ export default function App() {
 
     if(qtdJogadas === 1){
       Alert.alert(
-        'VELHA',
-        `O JOGO DEU VELHA`,
+        'DEU VELHA !!',
+        '',
         [{ text: 'OK', onPress: () => {
-   
+          setQtdVelhas(qtdVelhas + 1);
           setMatriz([['', '', ''], ['', '', ''], ['', '', '']]);
           setQtdJogadas(9);
           setVezJogador(primeiroJogador === "X" ? "O" : "X");
@@ -81,8 +88,6 @@ export default function App() {
       );
       return; 
     }
-
-
   }
 
   return (
@@ -92,7 +97,7 @@ export default function App() {
         <Text style={styles.vezJogador}>
           Rodada do jogador:
           <Text style={{ color: vezJogador === "X" ? "red" : "blue", fontWeight: 'bold' }}>
-            {" " + vezJogador}
+            {"  " + vezJogador}
           </Text>
         </Text>
         <Text style={styles.vezJogador}>
@@ -117,6 +122,21 @@ export default function App() {
             </View>
           ))}
         </View>
+      </View>
+
+      <View style={styles.rodape}>
+        <Text style={styles.placar}>Placar</Text>
+        <Text style={[styles.vezJogador, { color: "red", fontWeight: 'bold', fontSize: 30 }]}>
+          X: {qtdVencedorX}
+        </Text>
+
+        <Text style={[styles.vezJogador, { color: "blue", fontWeight: 'bold', fontSize: 30 }]}>
+          O: {qtdVencedorO}
+        </Text>
+
+        <Text style={[styles.vezJogador, { color: "black", fontWeight: 'bold', fontSize: 30 }]}>
+          Velha: {qtdVelhas}
+        </Text>
       </View>
     </View>
   );

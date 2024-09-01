@@ -26,10 +26,11 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   vezJogador: {
-
+    color: "black",
     fontSize: 30,
     textAlign: "left",
     marginLeft: 10,
+    fontWeight: "400",
   
   },
   ticTacToe: {
@@ -58,10 +59,25 @@ const styles = StyleSheet.create({
   iconsXO: {
     textAlign: "center",
     fontSize: 50,
-    fontWeight: "bold",
-    
+    fontWeight: "bold", 
 
   },
+  rodape:{
+    backgroundColor: "#e6e6e6",
+    width: "100%",
+    height: "20%",
+    minHeight: 150,
+    justifyContent: 'flex-start', // Alinha o conteúdo verticalmente no final
+
+    padding: 10, // Adiciona algum espaço ao redor do conteúdo
+  },
+  placar:{
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    fontSize: 35,
+    textAlign: "center",
+    fontWeight: "bold",
+  }
 });
 
 export default styles;
